@@ -6,7 +6,7 @@
     <title id="page-title">Super Shop BD - প্রিমিয়াম সফটওয়্যার ও ডিজিটাল সাবস্ক্রিপশন শপ</title>
     <link id="dynamic-favicon" rel="icon" type="image/png" href="supershop-logo.png">
     <link rel="apple-touch-icon" href="supershop-logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-body: #F8FAFC;
@@ -17,6 +17,9 @@
             --green-dark: #059669;
             --green-grad: linear-gradient(135deg, #10B981, #059669);
             --green-light: #ECFDF5;
+            --logo-teal: #14B8A6;
+            --logo-cyan: #22D3EE;
+            --logo-grad: linear-gradient(90deg, #22D3EE 0%, #14B8A6 55%, #10B981 100%);
             --blue-main: #0284C7;
             --blue-dark: #0369A1;
             --blue-light: #F0F9FF;
@@ -33,18 +36,18 @@
         /* Navbar */
         .navbar {
             background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border); padding: 14px 6%;
+            border-bottom: 1px solid var(--border); padding: 12px 6%;
             display: flex; justify-content: space-between; align-items: center;
             position: sticky; top: 0; z-index: 900; box-shadow: 0 2px 15px rgba(0,0,0,0.03);
         }
         .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); }
-        .brand img { height: 44px; width: auto; border-radius: 8px; object-fit: contain; display: block; }
+        .brand img { height: 42px; width: auto; border-radius: 8px; object-fit: contain; display: block; }
         .brand-fallback {
-            width: 42px; height: 42px; background: var(--green-grad); color: #fff;
+            width: 40px; height: 40px; background: var(--green-grad); color: #fff;
             border-radius: 10px; display: none; align-items: center; justify-content: center;
-            font-size: 22px; font-weight: 800;
+            font-size: 20px; font-weight: 800;
         }
-        .brand-title { font-size: 24px; font-weight: 800; color: #0F172A; }
+        .brand-title { font-size: 23px; font-weight: 800; color: #0F172A; }
         .brand-title span { color: var(--blue-main); }
 
         .nav-links { display: flex; align-items: center; gap: 18px; }
@@ -52,53 +55,41 @@
         .nav-links a:hover { color: var(--green-dark); }
         .my-orders-btn {
             background: var(--blue-light); color: var(--blue-dark) !important;
-            border: 1.5px solid var(--blue-border); padding: 8px 15px; border-radius: 10px;
+            border: 1.5px solid var(--blue-border); padding: 7px 14px; border-radius: 10px;
             font-weight: 800 !important; display: inline-flex; align-items: center; gap: 6px;
         }
         .my-orders-btn:hover { background: var(--blue-main); color: #fff !important; }
         .wa-nav-btn {
-            background: var(--green-grad); color: #fff !important; padding: 9px 18px;
+            background: var(--green-grad); color: #fff !important; padding: 8px 16px;
             border-radius: 10px; font-weight: 700; box-shadow: 0 4px 12px rgba(16,185,129,0.3);
         }
 
-        .container { max-width: 1180px; margin: 0 auto; padding: 30px 20px; }
+        .container { max-width: 1180px; margin: 0 auto; padding: 20px 20px 30px; }
 
-        /* 🌟 PURE SOLID GRAPHIC HERO BANNER (NO IMAGE OVERLAP, VIBRANT COLORS) */
+        /* 🌟 COMPACT & PROPORTIONAL HERO BANNER (MATCHING REFERENCE HEIGHT & LOGO TEAL-CYAN COLORS) */
         .hero-banner {
-            background: radial-gradient(circle at 15% 20%, #1E293B 0%, #090F1D 55%, #050914 100%);
-            border-radius: 26px;
-            padding: 42px 42px;
+            background: radial-gradient(circle at 20% 25%, #0F2942 0%, #091326 55%, #050B16 100%);
+            border-radius: 22px;
+            padding: 26px 34px;
             color: #FFFFFF;
             display: grid;
-            grid-template-columns: 1.45fr 0.95fr;
-            gap: 36px;
+            grid-template-columns: 1.5fr 0.9fr;
+            gap: 28px;
             align-items: center;
-            box-shadow: 0 22px 50px rgba(15, 23, 42, 0.22), inset 0 1px 0 rgba(255,255,255,0.1);
-            margin-bottom: 55px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+            margin-bottom: 34px;
             position: relative;
             overflow: hidden;
-            border: 2px solid rgba(56, 189, 248, 0.28);
+            border: 1.5px solid rgba(34, 211, 238, 0.28);
         }
-        /* Decorative Pure CSS Glow Orbs (Gives a 3D Poster Look without any image file) */
         .hero-banner::before {
             content: "";
             position: absolute;
-            top: -120px;
-            left: -80px;
-            width: 340px;
-            height: 340px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .hero-banner::after {
-            content: "";
-            position: absolute;
-            bottom: -140px;
-            right: -60px;
-            width: 380px;
-            height: 380px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+            top: -100px;
+            left: 30%;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.18) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
@@ -110,115 +101,156 @@
         }
         .hero-right { position: relative; z-index: 2; }
 
+        /* Top Row: Badge + Brand Name (Super in White, AI Typing in Logo Teal-Cyan) */
+        .hero-top-bar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
         .flag-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: linear-gradient(90deg, #F59E0B, #EA580C);
-            color: #fff; font-weight: 800; font-size: 13.5px; padding: 6px 18px;
-            border-radius: 30px; box-shadow: 0 6px 18px rgba(245,158,11,0.4);
-            border: 1px solid rgba(255,255,255,0.25);
-            margin-bottom: 18px; letter-spacing: 0.3px;
+            display: inline-flex; align-items: center; gap: 5px;
+            background: linear-gradient(90deg, #F59E0B, #D97706);
+            color: #fff; font-weight: 700; font-size: 13px; padding: 4px 14px;
+            border-radius: 30px; box-shadow: 0 4px 14px rgba(245,158,11,0.35);
+        }
+        .hero-brand-inline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(34, 211, 238, 0.25);
+            padding: 3px 12px 3px 6px;
+            border-radius: 30px;
+        }
+        .hero-brand-inline img {
+            width: 24px; height: 24px; border-radius: 6px; background: #fff; padding: 2px; object-fit: contain;
+        }
+        .hero-brand-inline .b-super {
+            color: #FFFFFF; font-weight: 800; font-size: 15px; letter-spacing: 0.2px;
+        }
+        .hero-brand-inline .b-ai {
+            background: var(--logo-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800; font-size: 15px; letter-spacing: 0.2px;
         }
 
+        /* Clean, Un-squished Bengali Slogan */
         .hero-main-heading {
-            font-size: 35px;
-            line-height: 1.28;
-            font-weight: 800;
-            margin-bottom: 14px;
+            font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+            font-size: 27px;
+            line-height: 1.38;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            margin-bottom: 8px;
             color: #FFFFFF;
-            letter-spacing: -0.3px;
         }
-        .grad-cyan {
-            background: linear-gradient(90deg, #38BDF8, #818CF8);
+        .hero-main-heading .slogan-line-1 {
+            display: block;
+            font-size: 22px;
+            color: #E2E8F0;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .logo-teal-text {
+            background: var(--logo-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        .grad-emerald {
-            background: linear-gradient(90deg, #34D399, #FBBF24);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
         .hero-sub-desc {
+            font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
             color: #CBD5E1;
-            font-size: 16.5px;
-            line-height: 1.65;
-            margin-bottom: 22px;
+            font-size: 15px;
+            line-height: 1.55;
+            letter-spacing: 0.15px;
+            margin-bottom: 14px;
             font-weight: 500;
         }
-        .hero-sub-desc b {
-            color: #F8FAFC;
-            font-weight: 700;
-        }
+        .hero-sub-desc b { color: #FFFFFF; font-weight: 700; }
         .hero-sub-desc .hl-tag {
-            color: #38BDF8;
-            font-weight: 800;
-            background: rgba(56, 189, 248, 0.12);
-            padding: 2px 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: #22D3EE;
+            font-weight: 700;
+            background: rgba(34, 211, 238, 0.12);
+            padding: 1px 7px;
+            border-radius: 5px;
+            border: 1px solid rgba(34, 211, 238, 0.28);
         }
 
-        /* 6 Colorful Feature Pills Grid */
+        /* Compact 6 Feature Pills (Matches Reference Style & Logo Teal Colors) */
         .hero-pills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, auto);
-            gap: 10px;
-            margin-bottom: 26px;
-            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
         }
         .h-pill {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border-radius: 11px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #F8FAFC;
-            background: rgba(30, 41, 59, 0.85);
-            transition: 0.25s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #F1F5F9;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(34, 211, 238, 0.32);
+            letter-spacing: 0.1px;
+            transition: 0.2s;
         }
-        .h-pill:hover { transform: translateY(-2px); }
-        .h-pill.c1 { border: 1.5px solid rgba(56, 189, 248, 0.45); background: linear-gradient(135deg, rgba(14,165,233,0.18), rgba(15,23,42,0.9)); }
-        .h-pill.c2 { border: 1.5px solid rgba(16, 185, 129, 0.45); background: linear-gradient(135deg, rgba(16,185,129,0.18), rgba(15,23,42,0.9)); }
-        .h-pill.c3 { border: 1.5px solid rgba(168, 85, 247, 0.45); background: linear-gradient(135deg, rgba(168,85,247,0.18), rgba(15,23,42,0.9)); }
-        .h-pill.c4 { border: 1.5px solid rgba(245, 158, 11, 0.45); background: linear-gradient(135deg, rgba(245,158,11,0.18), rgba(15,23,42,0.9)); }
-        .h-pill.c5 { border: 1.5px solid rgba(236, 72, 153, 0.45); background: linear-gradient(135deg, rgba(236,72,153,0.18), rgba(15,23,42,0.9)); }
-        .h-pill.c6 { border: 1.5px solid rgba(45, 212, 191, 0.45); background: linear-gradient(135deg, rgba(45,212,191,0.18), rgba(15,23,42,0.9)); }
+        .h-pill:hover {
+            border-color: #22D3EE;
+            background: rgba(20, 184, 166, 0.18);
+            transform: translateY(-1px);
+        }
+        .h-pill i {
+            font-style: normal;
+            font-size: 14px;
+        }
 
         .btn-green-main {
             background: var(--green-grad); color: #fff; text-decoration: none;
-            padding: 14px 28px; border-radius: 12px; font-size: 17px; font-weight: 700;
+            padding: 11px 24px; border-radius: 11px; font-size: 15.5px; font-weight: 700;
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            border: none; cursor: pointer; box-shadow: 0 8px 22px rgba(16, 185, 129, 0.38); transition: 0.25s;
+            border: none; cursor: pointer; box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35); transition: 0.25s;
         }
-        .btn-green-main:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(16, 185, 129, 0.55); }
+        .btn-green-main:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(16, 185, 129, 0.5); }
 
-        /* 100% Solid Opaque Right Card */
+        /* Compact Right Card */
         .hero-right-card {
-            background: linear-gradient(160deg, #111C33 0%, #0A1120 100%);
-            border: 2px solid rgba(16, 185, 129, 0.5);
-            border-radius: 22px;
-            padding: 32px 26px;
+            background: linear-gradient(160deg, #0D182C 0%, #08101E 100%);
+            border: 1.5px solid rgba(20, 184, 166, 0.45);
+            border-radius: 18px;
+            padding: 22px 20px;
             text-align: center;
-            box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.45);
         }
         .hero-card-logo {
-            width: 88px; height: 88px; border-radius: 20px; object-fit: contain;
-            margin: 0 auto 15px; display: block; background: #fff; padding: 8px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+            width: 68px; height: 68px; border-radius: 16px; object-fit: contain;
+            margin: 0 auto 10px; display: block; background: #fff; padding: 6px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+        }
+        .hero-card-title-txt {
+            font-size: 20px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.2px;
+        }
+        .hero-card-title-txt span {
+            background: var(--logo-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .verified-tag {
-            display: inline-block; background: rgba(16, 185, 129, 0.18);
-            color: #34D399; border: 1.5px solid #10B981; padding: 6px 18px;
-            border-radius: 20px; font-size: 13.5px; font-weight: 800; margin-top: 14px;
+            display: inline-block; background: rgba(16, 185, 129, 0.16);
+            color: #34D399; border: 1px solid #10B981; padding: 4px 14px;
+            border-radius: 20px; font-size: 12.5px; font-weight: 700; margin-top: 10px;
         }
 
         /* 🛍️ PRODUCT GRID */
-        .section-head { text-align: center; margin-bottom: 35px; }
-        .section-head h2 { font-size: 32px; color: #0F172A; font-weight: 800; }
-        .section-head p { color: var(--text-sub); font-size: 16.5px; margin-top: 4px; font-weight: 500; }
+        .section-head { text-align: center; margin-bottom: 28px; }
+        .section-head h2 { font-size: 29px; color: #0F172A; font-weight: 800; }
+        .section-head p { color: var(--text-sub); font-size: 15.5px; margin-top: 4px; font-weight: 500; }
 
         .product-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
@@ -477,9 +509,10 @@
 
         @media (max-width: 860px) {
             .hero-banner, .lp-hero-grid, .two-col-inputs, .support-btn-row { grid-template-columns: 1fr; }
-            .hero-pills-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-main-heading { font-size: 27px; }
-            .hero-banner, .lp-box, .checkout-card { padding: 26px 20px; }
+            .hero-main-heading { font-size: 22px; }
+            .hero-main-heading .slogan-line-1 { font-size: 18px; }
+            .hero-banner { padding: 22px 18px; gap: 20px; }
+            .lp-box, .checkout-card { padding: 26px 20px; }
             .carousel-slide img { height: 260px; }
             .nav-links a:not(.wa-nav-btn):not(.my-orders-btn) { display: none; }
         }
@@ -507,24 +540,34 @@
     <div id="home-view" class="container">
         <section class="hero-banner" id="hero-banner-box">
             <div class="hero-left">
-                <span class="flag-badge" id="hero-flag">🔥 ফ্ল্যাগশিপ পিসি সফটওয়্যার</span>
+                <!-- Top Badge & Brand Name Row (Super in White, AI Typing in Logo Teal-Cyan) -->
+                <div class="hero-top-bar">
+                    <span class="flag-badge" id="hero-flag">🔥 ফ্ল্যাগশিপ পিসি সফটওয়্যার</span>
+                    <div class="hero-brand-inline">
+                        <img src="logo.png" alt="Logo" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='/super-typing/logo.png';}">
+                        <span class="b-super">Super</span>
+                        <span class="b-ai">AI Typing</span>
+                    </div>
+                </div>
                 
+                <!-- Crisp, Well-Spaced Professional Slogan -->
                 <h1 class="hero-main-heading" id="hero-title">
-                    কীবোর্ড ছুঁয়েও দেখতে হবে না! কথা বললেই ঝড়ের গতিতে টাইপ ও <span class="grad-cyan">Live Translation</span> — <span class="grad-emerald">Super AI Typing</span>
+                    <span class="slogan-line-1">কীবোর্ড ছুঁয়েও দেখতে হবে না —</span>
+                    কথা বললেই ঝড়ের গতিতে টাইপ ও <span class="logo-teal-text">Live Translation!</span>
                 </h1>
                 
                 <p class="hero-sub-desc" id="hero-desc">
-                    পিসির যেকোনো সফটওয়্যারে (<b>MS Word, Browser, Messenger</b>) নির্ভুল <b>বাংলা ও English টাইপ করুন</b> এবং যেকোনো ভাষায় রিয়েল-টাইম <span class="hl-tag">Voice Translation</span> করুন চোখের পলকে!
+                    পিসির যেকোনো সফটওয়্যারে (<b>MS Word, Browser, Messenger</b>) নির্ভুল <b>বাংলা ও English টাইপিং</b> এবং রিয়েল-টাইম <span class="hl-tag">Voice Translation</span> করুন চোখের পলকে।
                 </p>
 
-                <!-- 6 Colorful Premium Feature Badges -->
+                <!-- 6 Compact Feature Pills -->
                 <div class="hero-pills-grid" id="hero-pills">
-                    <div class="h-pill c1">🎙️ বাংলা ও English টাইপিং</div>
-                    <div class="h-pill c2">🌐 Super Translation</div>
-                    <div class="h-pill c3">📱 ক্লাউড ফোন মাইক</div>
-                    <div class="h-pill c4">⌨️ শর্টকাট Hotkey</div>
-                    <div class="h-pill c5">💬 ফ্লোটিং মাইক</div>
-                    <div class="h-pill c6">✨ বাংলিশ ও Mix Mode</div>
+                    <div class="h-pill"><i>🎙️</i> বাংলা ও English টাইপিং</div>
+                    <div class="h-pill"><i>🌐</i> Super Translation</div>
+                    <div class="h-pill"><i>📱</i> ক্লাউড ফোন মাইক</div>
+                    <div class="h-pill"><i>⌨️</i> শর্টকাট Hotkey</div>
+                    <div class="h-pill"><i>💬</i> ফ্লোটিং মাইক</div>
+                    <div class="h-pill"><i>✨</i> বাংলিশ ও Mix Mode</div>
                 </div>
 
                 <div>
@@ -537,8 +580,8 @@
             <div class="hero-right">
                 <div class="hero-right-card" id="hero-right-card">
                     <img id="hero-card-img" class="hero-card-logo" src="logo.png" alt="Super AI Typing" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='/super-typing/logo.png';}">
-                    <h3 id="hero-card-title" style="font-size:23px; color:#fff; font-weight:800;">Super AI Typing (Windows)</h3>
-                    <p id="hero-card-sub" style="color:#CBD5E1; font-size:15.5px; margin-top:6px; font-weight:600;">ফ্রি ট্রায়াল সুবিধা | প্রো প্যাক মাত্র 99 টাকা</p>
+                    <h3 id="hero-card-title" class="hero-card-title-txt">Super <span>AI Typing</span> (Windows)</h3>
+                    <p id="hero-card-sub" style="color:#CBD5E1; font-size:14.5px; margin-top:5px; font-weight:600;">ফ্রি ট্রায়াল সুবিধা | প্রো প্যাক মাত্র 99 টাকা</p>
                     <div class="verified-tag" id="hero-card-badge">✔ 100% Verified Software</div>
                 </div>
             </div>
@@ -832,7 +875,6 @@
                     btnText: "🚀 বিস্তারিত জানুন ও ফ্রি ডাউনলোড করুন",
                     btnLink: "/super-typing/",
                     cardLogo: "logo.png",
-                    cardTitle: "Super AI Typing (Windows)",
                     cardSub: "ফ্রি ট্রায়াল সুবিধা | প্রো প্যাক মাত্র 99 টাকা",
                     cardBadge: "✔ 100% Verified Software"
                 }
@@ -966,7 +1008,7 @@
         let carouselTimer = null;
 
         async function loadStoreData() {
-            const cached = localStorage.getItem("supershop_cache_v9");
+            const cached = localStorage.getItem("supershop_cache_v10");
             if (cached) {
                 try { storeData = JSON.parse(cached); renderApp(); } catch(e){ renderApp(); }
             } else {
@@ -978,7 +1020,7 @@
                 const remote = await res.json();
                 if (remote && remote.products && remote.products.length > 0) {
                     storeData = remote;
-                    localStorage.setItem("supershop_cache_v9", JSON.stringify(storeData));
+                    localStorage.setItem("supershop_cache_v10", JSON.stringify(storeData));
                     renderApp();
                 } else {
                     await fetch(`${DB_URL}/data.json`, { method: 'PUT', body: JSON.stringify(DEFAULT_DATA) });
@@ -1021,7 +1063,6 @@
             document.getElementById('hero-btn-link').href = h.btnLink || "/super-typing/";
 
             document.getElementById('hero-card-img').src = resolveAssetPath(h.cardLogo || 'logo.png');
-            document.getElementById('hero-card-title').innerText = h.cardTitle || "Super AI Typing (Windows)";
             document.getElementById('hero-card-sub').innerText = h.cardSub || "ফ্রি ট্রায়াল সুবিধা | প্রো প্যাক মাত্র 99 টাকা";
             document.getElementById('hero-card-badge').innerText = h.cardBadge || "✔ 100% Verified Software";
 
@@ -1126,7 +1167,7 @@
             return false;
         }
 
-        // 📦 OPEN "MY ORDERS" VIEW (AUTO LOADS SAVED DEVICE ORDERS + ALLOWS TRXID SEARCH)
+        // 📦 OPEN "MY ORDERS" VIEW
         function openOrdersView(e) {
             if (e) e.preventDefault();
             stopAllMediaAndTimers();
@@ -1541,7 +1582,6 @@
                 time: new Date().toLocaleString()
             };
 
-            // Save Order ID to Customer's Browser so they never lose it without login!
             const savedIds = JSON.parse(localStorage.getItem('supershop_my_orders') || '[]');
             savedIds.push(orderId);
             localStorage.setItem('supershop_my_orders', JSON.stringify(savedIds));
