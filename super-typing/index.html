@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super AI Typing - আপনার পার্সোনাল AI Assistant</title>
+    <!-- Browser Tab Logo (Favicon) -->
+    <link rel="icon" href="logo.png" type="image/png">
+    
+    <!-- Google Fonts for Bengali Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Root Variables for Colors --- */
+        :root {
+            /* Dark Theme Colors */
+            --bg-dark: #0f172a;
+            --bg-card-dark: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted-dark: #94a3b8;
+            
+            /* Light Theme Colors */
+            --bg-light: #f8fafc;
+            --bg-card-light: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted-light: #64748b;
+            
+            /* Brand Colors */
+            --primary: #3b82f6;
+            --accent: #8b5cf6;
+            --success: #10b981; 
+            --danger: #ef4444;
+            --bkash: #e2136e;
+            --nagad: #f7941d;
+        }
+
+        /* --- Global Styles --- */
+        body {
+            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: var(--bg-light); /* Default fallback */
+            color: var(--text-dark);
+            zoom: 0.9; 
+            overflow-x: hidden;
+        }
+
+        /* The Ultimate Gradient Transition Fix */
+        .gradient-bg-wrapper {
+            background: linear-gradient(to bottom, var(--bg-dark) 0%, var(--bg-dark) 65%, var(--bg-light) 65%, var(--bg-light) 100%);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; } 
+        .text-center { text-align: center; }
+
+        /* --- SVG Icon Helpers --- */
+        .svg-icon {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+        .icon-danger { color: var(--danger); }
+        .icon-primary { color: var(--primary); }
+
+        /* --- Navbar (Dark Theme) --- */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-container {
+            display: flex; justify-content: space-between; align-items: center; height: 65px; 
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; color: var(--text-light); }
+        .logo-area img { height: 32px; }
+        .logo-text { font-size: 19px; font-weight: 700; }
+        .logo-text span { color: var(--primary); }
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white; padding: 8px 20px; border-radius: 8px; font-weight: 600; font-size: 14px;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { opacity: 0.9; }
+
+        /* --- Hero Section (Sized to Match Marked White Box) --- */
+        .hero { 
+            position: relative;
+            padding: 82px 0 15px;
+            text-align: right; 
+        }
+        
+        .hero-banner-container {
+            position: relative;
+            max-width: 1120px; /* Wide hero proportion with slight left-right margin */
+            height: 430px; /* Fixed height matching the marked white box */
+            margin: 0 auto;
+            border-radius: 14px; 
+            overflow: hidden; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5); 
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #0f172a;
+        }
+
+        .hero-slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .hero-banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Fits exact box size without cropping any text */
+            display: block;
+            flex-shrink: 0;
+        }
+        
+        .hero-fallback-div {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .hero-overlay-content {
+            position: absolute;
+            bottom: 22px; 
+            right: 32px; 
+            text-align: center;
+            z-index: 10;
+        }
+        .download-btn {
+            display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white; font-size: 15px; font-weight: 700; padding: 12px 30px; border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4); transition: transform 0.3s; margin-bottom: 10px;
+        }
+        .download-btn:hover { transform: translateY(-3px); }
+        .os-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.65); padding: 5px 13px; border-radius: 20px; font-size: 12px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.2);}
+
+        /* --- Animated Carousel Dots (For Hero & Screenshots) --- */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50px;
+            background-color: rgba(148, 163, 184, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 0;
+        }
+        .slider-dot.active {
+            width: 28px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-color: transparent;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+        }
+        /* Dots styling specifically for Light Theme Screenshot section */
+        .dots-light .slider-dot {
+            background-color: #cbd5e1;
+            border-color: #94a3b8;
+        }
+        .dots-light .slider-dot.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-color: transparent;
+        }
+
+        /* --- Video Demo Section (Dark Theme) --- */
+        .video-section { padding: 30px 0 60px; color: var(--text-light); }
+        .section-title-dark { font-size: 32px; font-weight: 700; margin-top: 0; margin-bottom: 12px; color: var(--text-light);}
+        .section-subtitle-dark { color: var(--text-muted-dark); font-size: 15px; margin-bottom: 40px; }
+        
+        .youtube-container {
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding-bottom: 56.25%; 
+            height: 0;
+            background: #000;
+        }
+        .youtube-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+
+        /* Custom Controls */
+        .custom-video-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .control-btn {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .control-btn:hover { background: var(--primary); border-color: var(--primary); }
+
+        /* --- Pain Points Section (Dark Theme ending here) --- */
+        .pain-points { padding: 60px 0 120px; color: var(--text-light); }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        
+        /* The Card Fix - ensuring it stays on top of the gradient */
+        .pain-card { 
+            background-color: var(--bg-card-dark); 
+            padding: 30px; 
+            border-radius: 14px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            text-align: left; 
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            position: relative;
+            z-index: 2; /* Forces card to be above the gradient background */
+        }
+        .pain-card:hover { 
+            transform: translateY(-8px); 
+            background-color: #233145; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        
+        .pain-card .icon-wrapper {
+            width: 50px; height: 50px; margin-bottom: 18px;
+            background: rgba(239, 68, 68, 0.1); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .pain-card h3 { margin-bottom: 12px; font-size: 20px; }
+        .pain-card p { color: var(--text-muted-dark); font-size: 15px; margin: 0; }
+
+        /* --- Section Titles for Light Theme --- */
+        .section-title-light { font-size: 32px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); }
+        .section-subtitle-light { color: var(--text-muted-light); font-size: 15px; margin-bottom: 40px; }
+
+        /* --- AI Features Section (Light Theme) --- */
+        .features { padding: 40px 0 60px; }
+        .feature-card { 
+            background-color: var(--bg-card-light); 
+            padding: 30px; 
+            border-radius: 14px; 
+            text-align: left; 
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
+            border: 1px solid #e2e8f0;
+            position: relative;
+            z-index: 2;
+        }
+        .feature-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15); 
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+        
+        .feature-card .icon-wrapper {
+            width: 50px; height: 50px; margin-bottom: 18px;
+            background: rgba(59, 130, 246, 0.1); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .feature-card h3 { font-size: 20px; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-muted-light); font-size: 15px; margin: 0; }
+        .highlight-text { color: var(--primary); font-weight: 600; }
+
+        /* --- Target Audience (Light Theme) --- */
+        .audience { padding: 60px 0; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+        .aud-card { background: var(--bg-card-light); padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; text-align: left; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+        .aud-card:hover { border-color: var(--primary); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.1); transform: translateY(-3px);}
+        .aud-card h3 { font-size: 16px; margin: 0; display: flex; align-items: center; justify-content: space-between; }
+        .aud-card h3 span { display: flex; align-items: center; gap: 8px; }
+        .aud-card i.arrow { color: #94a3b8; transition: 0.3s; }
+        .aud-card.active i.arrow { transform: rotate(180deg); color: var(--primary); }
+        .aud-card .content { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f5f9; color: var(--text-muted-light); font-size: 14px; }
+        .aud-card.active .content { display: block; }
+
+        /* --- Screenshot Slider (With Click to Enlarge & Dots) --- */
+        .screenshot-section { padding: 60px 0; }
+        .slider-container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            position: relative; 
+            border-radius: 14px; 
+            overflow: hidden; 
+            border: 1px solid #e2e8f0; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08); 
+        }
+        .slides {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .slides img { 
+            width: 100%; 
+            height: auto;
+            flex-shrink: 0;
+            display: block;
+            cursor: zoom-in; /* Indicates clickable image */
+            transition: opacity 0.2s;
+        }
+        .slides img:hover {
+            opacity: 0.96;
+        }
+        .zoom-hint {
+            font-size: 13px;
+            color: var(--text-muted-light);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* --- Image Lightbox Modal (For Screenshot Zoom/Hold) --- */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.92);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .lightbox-content-wrapper {
+            position: relative;
+            max-width: 92%;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.15);
+            object-fit: contain;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -42px;
+            right: 0;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: 0.2s;
+        }
+        .lightbox-close:hover { color: var(--danger); }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 41, 59, 0.85);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            user-select: none;
+        }
+        .lightbox-nav:hover { background: var(--primary); border-color: var(--primary); }
+        .lightbox-prev { left: -60px; }
+        .lightbox-next { right: -60px; }
+
+        /* --- Review Section (Light Theme) --- */
+        .review-section { padding: 60px 0; overflow: hidden; position: relative; }
+        .review-container { display: flex; gap: 18px; animation: scrollLeft 40s linear infinite; white-space: nowrap; padding: 15px 0; margin-bottom: 25px; } 
+        .review-container:hover { animation-play-state: paused; }
+        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .review-card { background: var(--bg-card-light); border: 1px solid #e2e8f0; padding: 20px; border-radius: 10px; min-width: 320px; display: inline-block; white-space: normal; vertical-align: top; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .reviewer-info { margin-bottom: 10px; }
+        .reviewer-name { font-weight: 700; font-size: 16px; display: block; }
+        .reviewer-meta { font-size: 12px; color: var(--primary); display: block; margin-top: 2px; }
+        .review-text { font-size: 14px; color: var(--success); font-style: italic; line-height: 1.5; }
+        
+        .add-review-btn { display: inline-block; background: transparent; border: 2px solid var(--primary); color: var(--primary); padding: 10px 22px; border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: 600; font-size: 15px; }
+        .add-review-btn:hover { background: rgba(59, 130, 246, 0.1); transform: translateY(-2px); }
+
+        /* Fake Review Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
+        .modal-content { background: var(--bg-card-light); padding: 25px; border-radius: 14px; width: 90%; max-width: 400px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.25); text-align: left;}
+        .close-modal { position: absolute; top: 12px; right: 18px; color: var(--text-muted-light); cursor: pointer; font-size: 22px; transition: 0.2s;}
+        .close-modal:hover { color: var(--danger); }
+        .modal-content h3 { margin-top: 0; margin-bottom: 18px; font-size: 20px;}
+        .modal-content input, .modal-content textarea { width: 100%; padding: 10px; margin-bottom: 12px; background: var(--bg-light); border: 1px solid #e2e8f0; border-radius: 6px; color: var(--text-dark); box-sizing: border-box; font-family: inherit; font-size: 14px;}
+        .modal-content input:focus, .modal-content textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .modal-submit { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.3s;}
+        .modal-submit:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
+
+        /* --- Pricing Section (CENTER ALIGNED) --- */
+        .pricing { padding: 60px 0; }
+        .price-box { max-width: 450px; margin: 0 auto; background: var(--bg-card-light); padding: 40px 25px; border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; position: relative; text-align: center; }
+        .price-box .section-title-light { font-size: 24px; }
+        .price { font-size: 48px; font-weight: 700; margin: 15px 0; font-family: 'Inter', sans-serif; }
+        .price span { font-size: 16px; color: var(--text-muted-light); font-weight: 400; }
+        .pkg-info { color: var(--text-muted-light); font-size: 15px; margin-bottom: 25px; font-weight: 600; }
+        .payment-methods { display: flex; justify-content: center; gap: 12px; margin-bottom: 18px; }
+        .pay-badge { padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        .pay-bkash { background: rgba(226, 19, 110, 0.1); color: var(--bkash); border: 1px solid rgba(226, 19, 110, 0.2); }
+        .pay-nagad { background: rgba(247, 148, 29, 0.1); color: var(--nagad); border: 1px solid rgba(247, 148, 29, 0.2); }
+
+        /* --- FINAL DOWNLOAD SECTION --- */
+        .final-download-section { 
+            padding: 60px 0 80px; 
+            text-align: center;
+        }
+        .fd-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card-light);
+            padding: 50px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+        }
+        .fd-box h2 { 
+            font-size: 32px; 
+            color: var(--text-dark); 
+            margin-top: 0;
+            margin-bottom: 15px; 
+            line-height: 1.3;
+        }
+        .fd-box p {
+            font-size: 18px;
+            color: var(--text-muted-light);
+            margin-bottom: 30px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        .fd-box p strong {
+            color: var(--primary);
+        }
+        .final-btn { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 10px; 
+            background: linear-gradient(135deg, var(--primary), var(--accent)); 
+            color: white; 
+            font-size: 20px; 
+            font-weight: 700; 
+            padding: 18px 45px; 
+            border-radius: 50px; 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); 
+            margin-bottom: 20px;
+        }
+        .final-btn:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4); 
+            color: white; 
+        }
+        .final-os-badge { 
+            color: var(--text-muted-light); 
+            font-size: 14px; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 6px;
+        }
+        .final-os-badge svg { width: 16px; height: 16px; fill: #0078d7; }
+
+        /* --- Footer (Dark Theme) --- */
+        footer { padding: 25px 0; border-top: 1px solid rgba(255,255,255,0.05); background-color: var(--bg-dark); color: var(--text-light);}
+        .footer-container { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .footer-logo { height: 22px; opacity: 0.8; }
+        .footer-links a { color: var(--text-muted-dark); font-size: 13px; transition: 0.3s; }
+        .footer-links a:hover { color: white; text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .hero-banner-container { height: auto; }
+            .hero-banner-img { height: auto; }
+            .hero-overlay-content { position: relative; bottom: 0; right: 0; padding: 20px; }
+            .footer-container { flex-direction: column; gap: 12px; text-align: center; }
+            body { zoom: 1; } /* Reset zoom on mobile */
+            .gradient-bg-wrapper { background: linear-gradient(to bottom, var(--bg-dark) 0%, var(--bg-dark) 45%, var(--bg-light) 45%, var(--bg-light) 100%); }
+            .fd-box h2 { font-size: 24px; }
+            .final-btn { font-size: 16px; padding: 15px 30px; }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="gradient-bg-wrapper">
+    <!-- Header (Dark Theme) -->
+    <header>
+        <div class="nav-container container">
+            <a href="#" class="logo-area">
+                <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
+                <div class="logo-text">Super AI <span>Typing</span></div>
+            </a>
+            <a href="#download-section" class="nav-btn">ফ্রি ট্রায়াল নিন</a>
+        </div>
+    </header>
+
+    <!-- Hero Section (Dark Theme with Smart Slider, White-Box Sizing & Moving Dots) -->
+    <section class="hero container">
+        <div class="hero-banner-container" id="heroContainer">
+            <div class="hero-slides" id="heroSlider">
+                <img src="hero-banner.png" alt="Super AI Typing Hero Banner" class="hero-banner-img" onerror="this.remove()">
+                <img src="hero-banner2.png" alt="Hero Banner 2" class="hero-banner-img" onerror="this.remove()">
+                <img src="hero-banner3.png" alt="Hero Banner 3" class="hero-banner-img" onerror="this.remove()">
+                <img src="hero-banner4.png" alt="Hero Banner 4" class="hero-banner-img" onerror="this.remove()">
+            </div>
+            
+            <div class="hero-overlay-content">
+                <a href="https://github.com/supershopbd/supershopbd.github.io/releases/download/v1.0/Super_AI_Typing_Setup_v1.0.1.exe" class="download-btn">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    সম্পূর্ণ বিনামূল্যে ডাউনলোড করুন
+                </a>
+                <br>
+                <div class="os-badge">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="fill:#4ade80; width:14px; height:14px;"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/></svg>
+                    Windows 10 & 11 (100% Optimized)
+                </div>
+            </div>
+        </div>
+        <!-- Dynamic Hero Dots -->
+        <div class="slider-dots" id="heroDots"></div>
+    </section>
+
+    <!-- Video Demo Section -->
+    <section class="video-section text-center">
+        <div class="container">
+            <h2 class="section-title-dark">নিজের চোখেই দেখুন <span style="color: var(--primary);">AI</span> ম্যাজিক!</h2>
+            <p class="section-subtitle-dark">কীভাবে কথা বললেই নিখুঁত টাইপিং হয়, দেখে নিন এক নজরে</p>
+            
+            <div class="youtube-container">
+                <div class="custom-video-controls">
+                    <button class="control-btn" id="playPauseBtn" onclick="togglePlayPause()" title="Play/Pause">
+                        <svg class="svg-icon" viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </button>
+                    <button class="control-btn" id="muteUnmuteBtn" onclick="toggleMute()" title="Mute/Unmute">
+                        <svg class="svg-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    </button>
+                </div>
+                <div id="ytplayer"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points -->
+    <section class="pain-points text-center">
+        <div class="container">
+            <h2 class="section-title-dark">টাইপিং করতে গিয়ে আপনিও কি এই সমস্যাগুলোতে ভুগছেন?</h2>
+            <p class="section-subtitle-dark">ম্যানুয়াল টাইপিংয়ের সাধারণ কিছু ভোগান্তি, যা আপনার কাজের গতি কমিয়ে দেয়</p>
+            
+            <div class="grid-3">
+                <div class="pain-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-danger" viewBox="0 0 24 24"><path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z"/></svg>
+                    </div>
+                    <h3>কঠিন ও ধীরগতির বাংলা টাইপিং</h3>
+                    <p>বিভিন্ন কিবোর্ড সফটওয়্যার ব্যবহার করার পরও বাংলা টাইপ করা যথেষ্ট কষ্টকর। স্পেলিং মেলাতে গিয়ে প্রচুর সময় নষ্ট হয়।</p>
+                </div>
+                <div class="pain-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-danger" viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg>
+                    </div>
+                    <h3>শারীরিক ক্লান্তি ও চোখের ক্ষতি</h3>
+                    <p>ঘণ্টার পর ঘণ্টা স্ক্রিনের দিকে ঝুঁকে টাইপ করতে গিয়ে ঘাড় ও পিঠে ব্যথা শুরু হয়, যা দীর্ঘমেয়াদে মারাত্মক ক্ষতিকর।</p>
+                </div>
+                <div class="pain-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-danger" viewBox="0 0 24 24"><path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5l-4-4V4h8v3.5l-4 4z"/></svg>
+                    </div>
+                    <h3>সময় নষ্ট ও কাজের ধীরগতি</h3>
+                    <p>নতুন কম্পিউটার ব্যবহারকারী হোন বা প্রফেশনাল, বিশাল আকারের নথিপত্র হাতে টাইপ করতে গিয়ে কাজের প্রোডাক্টিভিটি একদম কমে যায়।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Features -->
+    <section class="features text-center">
+        <div class="container">
+            <h2 class="section-title-light">আপনার জন্য Super AI এর <span style="color: var(--accent);">এক্সক্লুসিভ ফিচারসমূহ</span></h2>
+            <p class="section-subtitle-light">যে কারণে এটি প্রতিটি উইন্ডোজ পিসি ইউজারের জন্য অপরিহার্য</p>
+            
+            <div class="grid-3">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-primary" viewBox="0 0 24 24"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+                    </div>
+                    <h3>AI Voice Typing</h3>
+                    <p>মুখে কথা বলে সবচেয়ে <span class="highlight-text">দ্রুত ও নিখুঁত</span> বাংলা টাইপিং করুন। সিস্টেম আপনার কথা ঠিকই বুঝে নেবে।</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-primary" viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+                    </div>
+                    <h3>AI Live Translation</h3>
+                    <p>বাংলায় কথা বলুন, আর এআই সাথে সাথে ইংরেজি, আরবি, হিন্দি, ফ্রেঞ্চসহ পৃথিবীর <span class="highlight-text">যেকোনো ভাষায়</span> ট্রান্সলেট করে টাইপ করে দেবে।</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-primary" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                    </div>
+                    <h3>Mix Mode ও Banglish</h3>
+                    <p>বাংলা-ইংরেজি <span class="highlight-text">মিশিয়ে বলুন</span> অথবা সোশ্যাল মিডিয়ার জন্য 'Banglish' এ চ্যাট করুন, সবই সম্ভব।</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-primary" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+                    </div>
+                    <h3>Cloud Mic (ক্লাউড মাইক)</h3>
+                    <p>পিসিতে মাইক নেই? কোনো চিন্তা নেই। নিজের <span class="highlight-text">স্মার্টফোনকেই বানিয়ে ফেলুন</span> কম্পিউটারের শক্তিশালী ওয়্যারলেস মাইক!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-primary" viewBox="0 0 24 24"><path d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 1.56 4 4.92 4 9h7V1.07z"/></svg>
+                    </div>
+                    <h3>Floating Mic ও Hotkeys</h3>
+                    <p>স্ক্রিনের ভাসমান মাইকে <span class="highlight-text">এক ক্লিক</span> অথবা কীবোর্ড শর্টকাট (Hotkey) চেপে মুহূর্তেই টাইপিং শুরু করুন।</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <svg class="svg-icon icon-primary" viewBox="0 0 24 24"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
+                    </div>
+                    <h3>Auto Punctuation</h3>
+                    <p>দাড়ি, কমা কোথায় বসবে তা নিয়ে আর ভাবতে হবে না। কথার ধরন বুঝে এআই নিজ দায়িত্বে <span class="highlight-text">যতিচিহ্ন বসিয়ে</span> দেবে।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div> <!-- End of gradient wrapper -->
+
+    <!-- Target Audience -->
+    <section class="audience text-center">
+        <div class="container">
+            <h2 class="section-title-light">Super AI Typing কার জন্য সেরা সমাধান?</h2>
+            <p class="section-subtitle-light">যাদের প্রতিদিন কম্পিউটারে কাজ করতে হয়, তাদের সবার জন্য। বিস্তারিত জানতে ক্লিক করুন:</p>
+            
+            <div class="grid-4">
+                <div class="aud-card" onclick="toggleCard(this)">
+                    <h3><span>🎓 শিক্ষক ও শিক্ষার্থী</span> <i class="fas fa-chevron-down arrow"></i></h3>
+                    <div class="content">বড় অ্যাসাইনমেন্ট, থিসিস পেপার, রিসার্চের কাজ বা ক্লাসের প্রশ্নপত্র তৈরি করুন চোখের পলকে। কয়েক ঘণ্টার কাজ সেরে ফেলুন মাত্র কয়েক মিনিটে।</div>
+                </div>
+                <div class="aud-card" onclick="toggleCard(this)">
+                    <h3><span>👨‍⚖️ আইনজীবী</span> <i class="fas fa-chevron-down arrow"></i></h3>
+                    <div class="content">কোর্টের বড় বড় কেস ফাইল ও আইনি দলিল নিমেষেই টাইপ করুন। আপনার সময় ও পরিশ্রম দুটোই বাঁচবে।</div>
+                </div>
+                <div class="aud-card" onclick="toggleCard(this)">
+                    <h3><span>🏢 চাকরিজীবী ও অফিস</span> <i class="fas fa-chevron-down arrow"></i></h3>
+                    <div class="content">এমএস ওয়ার্ড বা এক্সেলে বড় রিপোর্ট বানাতে ক্লান্ত? মুখে নির্দেশ দিন আর রিল্যাক্স করুন। আপনার কাজ দ্রুত শেষ হবে।</div>
+                </div>
+                <div class="aud-card" onclick="toggleCard(this)">
+                    <h3><span>💼 ব্যবসায়ী</span> <i class="fas fa-chevron-down arrow"></i></h3>
+                    <div class="content">কাস্টমারদের দ্রুত রিপ্লাই দেওয়া, ইমেইল লেখা এবং মেসেঞ্জারে কাস্টমার সাপোর্ট দিন সুপার ফাস্ট গতিতে।</div>
+                </div>
+                <div class="aud-card" onclick="toggleCard(this)">
+                    <h3><span>💻 ফ্রিল্যান্সার</span> <i class="fas fa-chevron-down arrow"></i></h3>
+                    <div class="content">বিদেশি ক্লায়েন্টের সাথে যেকোনো ভাষায় দ্রুত চ্যাট করুন লাইভ ট্রান্সলেশনের মাধ্যমে। কমিউনিকেশন হবে আরও প্রফেশনাল।</div>
+                </div>
+                <div class="aud-card" onclick="toggleCard(this)">
+                    <h3><span>🏪 কম্পিউটারের দোকানদার</span> <i class="fas fa-chevron-down arrow"></i></h3>
+                    <div class="content">কাস্টমারদের সিভি, বড় নথিপত্র বা দরখাস্ত এখন হাতে টাইপ না করে মুখে বলেই ঝটপট শেষ করে ফেলুন। ইনকাম বাড়বে।</div>
+                </div>
+                <div class="aud-card" onclick="toggleCard(this)">
+                    <h3><span>🛒 ই-কমার্স উদ্যোক্তা</span> <i class="fas fa-chevron-down arrow"></i></h3>
+                    <div class="content">ফেসবুক পেজে প্রচুর মেসেজ আসে? বাংলিশ বা বাংলায় ভয়েস টাইপ করে দ্রুত রিপ্লাই দিন, সেলস কনভার্সন বাড়ান।</div>
+                </div>
+                <div class="aud-card" onclick="toggleCard(this)">
+                    <h3><span>🖥️ সাধারণ ইউজার</span> <i class="fas fa-chevron-down arrow"></i></h3>
+                    <div class="content">টাইপিং স্পিড স্লো? কোনো চিন্তা নেই, শুধু মুখে নির্দেশ দিন, আপনার এআই অ্যাসিস্ট্যান্ট বাকিটা সামলে নেবে!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshot Slider (With Moving Dots & Click to Zoom/Hold) -->
+    <section class="screenshot-section text-center">
+        <div class="container">
+            <h2 class="section-title-light">এক নজরে সফটওয়্যার ইন্টারফেস</h2>
+            <p class="section-subtitle-light">সিম্পল, ক্লিন এবং ইউজার-ফ্রেন্ডলি ডিজাইন</p>
+            
+            <div class="slider-container" id="screenshotContainer">
+                <div class="slides" id="screenshotSlider">
+                    <img src="screenshot1.png" alt="Interface 1" onerror="this.remove()">
+                    <img src="screenshot2.png" alt="Interface 2" onerror="this.remove()">
+                    <img src="screenshot3.png" alt="Interface 3" onerror="this.remove()">
+                    <img src="screenshot4.png" alt="Interface 4" onerror="this.remove()">
+                </div>
+            </div>
+            <!-- Dynamic Screenshot Dots -->
+            <div class="slider-dots dots-light" id="screenshotDots"></div>
+            <div class="zoom-hint">🔍 যেকোনো স্ক্রিনশটে ক্লিক করে বড় করে দেখুন</div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Lightbox Modal for Screenshots -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
+        <div class="lightbox-content-wrapper">
+            <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+            <button class="lightbox-nav lightbox-prev" onclick="changeLightboxSlide(-1, event)">&#10094;</button>
+            <img id="lightboxImg" class="lightbox-img" src="" alt="Enlarged Screenshot">
+            <button class="lightbox-nav lightbox-next" onclick="changeLightboxSlide(1, event)">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <section class="review-section text-center">
+        <div class="container">
+            <h2 class="section-title-light">আমাদের ইউজাররা কী বলছেন?</h2>
+            <p class="section-subtitle-light">সারা বাংলাদেশ থেকে হাজারো সন্তুষ্ট ইউজারের মতামত</p>
+        </div>
+        
+        <div class="review-container">
+            <div class="review-card">
+                <div class="reviewer-info">
+                    <span class="reviewer-name">রাশেদুল ইসলাম</span>
+                    <span class="reviewer-meta">ঢাকা • ফ্রিল্যান্সার</span>
+                </div>
+                <p class="review-text">"অসাধারণ! লাইভ ট্রান্সলেশন ফিচারটা দিয়ে বিদেশি ক্লায়েন্টদের সাথে চ্যাট করা এখন পানির মতো সহজ হয়ে গেছে। ধন্যবাদ।"</p>
+            </div>
+            <div class="review-card">
+                <div class="reviewer-info">
+                    <span class="reviewer-name">সায়মা রহমান</span>
+                    <span class="reviewer-meta">চট্টগ্রাম • শিক্ষার্থী</span>
+                </div>
+                <p class="review-text">"আমার থিসিসের অনেক বড় একটা অংশ আমি শুধু কথা বলেই টাইপ করে ফেলেছি। ভাবতেই অবাক লাগছে, অনেক সময় বেঁচেছে!"</p>
+            </div>
+            <div class="review-card">
+                <div class="reviewer-info">
+                    <span class="reviewer-name">অ্যাডভোকেট কামরুল</span>
+                    <span class="reviewer-meta">সিলেট • আইনজীবী</span>
+                </div>
+                <p class="review-text">"কোর্টের বড় বড় ড্রাফট করতে গিয়ে আগে পিঠে ব্যথা হয়ে যেত। এখন সুপার এআই দিয়ে মুখে বলি আর টাইপ হয়ে যায়। ৯৯ টাকায় এটা আসলেই সেরা।"</p>
+            </div>
+            <div class="review-card">
+                <div class="reviewer-info">
+                    <span class="reviewer-name">মেহেদী হাসান</span>
+                    <span class="reviewer-meta">রাজশাহী • ই-কমার্স উদ্যোক্তা</span>
+                </div>
+                <p class="review-text">"পেজের কাস্টমারদের দ্রুত রিপ্লাই দিতে বাংলিশ ফিচারটা খুব কাজে দিচ্ছে। টাইপিং স্পিড ডাবল হয়ে গেছে।"</p>
+            </div>
+            <div class="review-card">
+                <div class="reviewer-info">
+                    <span class="reviewer-name">তরিকুল আলম</span>
+                    <span class="reviewer-meta">খুলনা • টাইপিং সেন্টার</span>
+                </div>
+                <p class="review-text">"দোকানের কাজের চাপ অনেক কমেছে। কাস্টমারদের কাজ এখন আগের চেয়ে অর্ধেক সময়ে ডেলিভারি দিতে পারছি। ক্লাউড মাইক জোস!"</p>
+            </div>
+            <div class="review-card">
+                <div class="reviewer-info">
+                    <span class="reviewer-name">রাশেদুল ইসলাম</span>
+                    <span class="reviewer-meta">ঢাকা • ফ্রিল্যান্সার</span>
+                </div>
+                <p class="review-text">"অসাধারণ! লাইভ ট্রান্সলেশন ফিচারটা দিয়ে বিদেশি ক্লায়েন্টদের সাথে চ্যাট করা এখন পানির মতো সহজ হয়ে গেছে। ধন্যবাদ।"</p>
+            </div>
+            <div class="review-card">
+                <div class="reviewer-info">
+                    <span class="reviewer-name">সায়মা রহমান</span>
+                    <span class="reviewer-meta">চট্টগ্রাম • শিক্ষার্থী</span>
+                </div>
+                <p class="review-text">"আমার থিসিসের অনেক বড় একটা অংশ আমি শুধু কথা বলেই টাইপ করে ফেলেছি। ভাবতেই অবাক লাগছে, অনেক সময় বেঁচেছে!"</p>
+            </div>
+        </div>
+
+        <button class="add-review-btn" onclick="openModal()">আপনার রিভিউ লিখুন</button>
+    </section>
+
+    <!-- Fake Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>আপনার মতামত জানান</h3>
+            <input type="text" placeholder="আপনার নাম (যেমন: শফিক আহমেদ)" id="rName">
+            <input type="text" placeholder="পেশা ও জেলা (যেমন: শিক্ষক, কুমিল্লা)" id="rMeta">
+            <textarea rows="4" placeholder="সুপার এআই টাইপিং ব্যবহার করে আপনার কেমন লাগছে তা বিস্তারিত লিখুন..." id="rText"></textarea>
+            <button class="modal-submit" onclick="submitReview()">সাবমিট করুন</button>
+        </div>
+    </div>
+
+    <!-- Pricing Section (CENTER ALIGNED AS REQUESTED) -->
+    <section class="pricing text-center">
+        <div class="container">
+            <h2 class="section-title-light">পেমেন্ট করতে হবে ডলার বা কার্ডে? একদম না!</h2>
+            <p class="section-subtitle-light" style="margin-bottom: 30px;">সম্পূর্ণ দেশীয় পদ্ধতিতে নগদ বা বিকাশের মাধ্যমে পেমেন্ট করে আজই শুরু করুন</p>
+            
+            <div class="price-box">
+                <h3 style="font-size: 20px; margin:0;">১ মাসের প্রিমিয়াম স্টার্টিং সাবস্ক্রিপশন</h3>
+                <div class="price">৳ ৯৯ <span>/ মাস</span></div>
+                <p class="pkg-info">এছাড়াও থাকছে: ৬ মাস - ২৯০ টাকা | ১ বছর - ৪৯০ টাকা</p>
+                <div class="payment-methods">
+                    <div class="pay-badge pay-bkash">
+                        <svg class="svg-icon" viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> 
+                        বিকাশ সাপোর্ট
+                    </div>
+                    <div class="pay-badge pay-nagad">
+                        <svg class="svg-icon" viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        নগদ সাপোর্ট
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Download Section -->
+    <section id="download-section" class="final-download-section">
+        <div class="container">
+            <div class="fd-box">
+                <h2>আজই আপনার পুরানো টাইপিং এর কষ্ট দূর করুন! ডাউনলোড করুন সুপার এআই টাইপিং।</h2>
+                <p>
+                    <strong>কেনার আগে ৩টি ফ্রি ট্রায়াল!</strong><br>
+                    সম্পূর্ণ বিনামূল্যে ডাউনলোড করুন। আপনি এই তিনটি ফ্রি ট্রায়াল ব্যবহার করে যাচাই করুন, তারপরে যেকোনো একটি সাবস্ক্রিপশন কিনে আনলিমিটেড ভয়েস টাইপিং ও ট্রান্সলেশন ব্যবহার করুন।
+                </p>
+                
+                <a href="https://github.com/supershopbd/supershopbd.github.io/releases/download/v1.0/Super_AI_Typing_Setup_v1.0.1.exe" class="final-btn">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:24px;height:24px;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    সম্পূর্ণ বিনামূল্যে ডাউনলোড করুন
+                </a>
+                
+                <div class="final-os-badge">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/></svg>
+                    Windows 10 & 11 এর জন্য ১০০% অপ্টিমাইজড
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="theme-dark">
+        <div class="footer-container">
+            <img src="logo.png" alt="Super AI Typing Logo" class="footer-logo" onerror="this.outerHTML='<span style=\'font-weight:700;font-size:16px;\'>Super AI Typing</span>'">
+            <div class="footer-links"><a href="#">Privacy Policy</a></div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // 1. Audience Card Toggle
+        function toggleCard(element) {
+            let cards = document.querySelectorAll('.aud-card');
+            cards.forEach(card => {
+                if(card !== element) card.classList.remove('active');
+            });
+            element.classList.toggle('active');
+        }
+
+        // 2. Smart Universal Slider with Dynamic Dots, Hover-Hold & Lightbox Support
+        const sliderInstances = {};
+
+        function initSmartSlider(sliderId, dotsId, wrapperId, enableLightbox = false) {
+            const slider = document.getElementById(sliderId);
+            const dotsContainer = document.getElementById(dotsId);
+            const wrapper = document.getElementById(wrapperId);
+            if (!slider) return;
+
+            setTimeout(() => {
+                const validSlides = Array.from(slider.querySelectorAll('img')).filter(
+                    img => window.getComputedStyle(img).display !== 'none' && img.naturalWidth > 0
+                );
+
+                const total = validSlides.length;
+                if (total === 0) return;
+
+                let currentIndex = 0;
+                let intervalId = null;
+                let isPaused = false;
+
+                // Create dots dynamically if more than 1 image exists
+                dotsContainer.innerHTML = '';
+                const dots = [];
+                if (total > 1) {
+                    for (let i = 0; i < total; i++) {
+                        const dot = document.createElement('button');
+                        dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+                        dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+                        dot.onclick = () => {
+                            goToSlide(i);
+                            restartTimer();
+                        };
+                        dotsContainer.appendChild(dot);
+                        dots.push(dot);
+                    }
+                }
+
+                // Enable click-to-zoom lightbox for screenshots
+                if (enableLightbox) {
+                    validSlides.forEach((img, idx) => {
+                        img.onclick = () => openLightbox(validSlides, idx, sliderId);
+                    });
+                }
+
+                function goToSlide(index) {
+                    currentIndex = (index + total) % total;
+                    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    dots.forEach((d, idx) => d.classList.toggle('active', idx === currentIndex));
+                }
+
+                function nextSlide() {
+                    if (!isPaused && total > 1) {
+                        goToSlide(currentIndex + 1);
+                    }
+                }
+
+                function startTimer() {
+                    if (total > 1 && !intervalId) {
+                        intervalId = setInterval(nextSlide, 5000);
+                    }
+                }
+
+                function restartTimer() {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                    startTimer();
+                }
+
+                // Pause on mouse hover so user can focus
+                if (wrapper) {
+                    wrapper.addEventListener('mouseenter', () => { isPaused = true; });
+                    wrapper.addEventListener('mouseleave', () => { isPaused = false; });
+                }
+
+                sliderInstances[sliderId] = {
+                    setPaused: (val) => { isPaused = val; },
+                    goToSlide
+                };
+
+                startTimer();
+            }, 1000);
+        }
+
+        initSmartSlider('heroSlider', 'heroDots', 'heroContainer', false);
+        initSmartSlider('screenshotSlider', 'screenshotDots', 'screenshotContainer', true);
+
+        // 3. Fullscreen Lightbox Functions for Screenshot Zoom/Hold
+        let currentLightboxImages = [];
+        let currentLightboxIndex = 0;
+        let activeSliderIdForLightbox = null;
+
+        function openLightbox(imagesArray, index, sliderId) {
+            currentLightboxImages = imagesArray;
+            currentLightboxIndex = index;
+            activeSliderIdForLightbox = sliderId;
+
+            if (sliderInstances[sliderId]) {
+                sliderInstances[sliderId].setPaused(true);
+            }
+
+            const modal = document.getElementById('lightboxModal');
+            const modalImg = document.getElementById('lightboxImg');
+            modalImg.src = currentLightboxImages[currentLightboxIndex].src;
+            modal.style.display = 'flex';
+        }
+
+        function changeLightboxSlide(step, event) {
+            if (event) event.stopPropagation();
+            if (currentLightboxImages.length === 0) return;
+            currentLightboxIndex = (currentLightboxIndex + step + currentLightboxImages.length) % currentLightboxImages.length;
+            document.getElementById('lightboxImg').src = currentLightboxImages[currentLightboxIndex].src;
+
+            if (activeSliderIdForLightbox && sliderInstances[activeSliderIdForLightbox]) {
+                sliderInstances[activeSliderIdForLightbox].goToSlide(currentLightboxIndex);
+            }
+        }
+
+        function closeLightbox(event) {
+            if (event && event.target.id === 'lightboxImg') return;
+            document.getElementById('lightboxModal').style.display = 'none';
+            if (activeSliderIdForLightbox && sliderInstances[activeSliderIdForLightbox]) {
+                sliderInstances[activeSliderIdForLightbox].setPaused(false);
+            }
+        }
+
+        // Keyboard Esc & Arrow support for Lightbox
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('lightboxModal');
+            if (modal.style.display === 'flex') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') changeLightboxSlide(1);
+                if (e.key === 'ArrowLeft') changeLightboxSlide(-1);
+            }
+        });
+
+        // 4. Review Modal Functions
+        function openModal() { document.getElementById('reviewModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('reviewModal').style.display = 'none'; }
+        function submitReview() {
+            alert('ধন্যবাদ! আপনার রিভিউটি মডারেশনের জন্য পাঠানো হয়েছে। অ্যাডমিন অ্যাপ্রুভ করলে এটি ওয়েবসাইটে শো করবে।');
+            closeModal();
+            document.getElementById('rName').value = '';
+            document.getElementById('rMeta').value = '';
+            document.getElementById('rText').value = '';
+        }
+
+        // 5. YouTube Iframe API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        // ==========================================
+        // এখানে আপনার ইউটিউব ভিডিওর আইডিগুলো বসান
+        // ==========================================
+        var videoPlaylist = ['YOUR_VIDEO_ID_1', 'YOUR_VIDEO_ID_2']; 
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('ytplayer', {
+                height: '100%',
+                width: '100%',
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0, 
+                    'rel': 0, 
+                    'showinfo': 0,
+                    'modestbranding': 1,
+                    'mute': 1, 
+                    'loop': 1,
+                    'playlist': videoPlaylist.join(',')
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) { event.target.playVideo(); }
+
+        function togglePlayPause() {
+            var playBtnIcon = document.querySelector('#playPauseBtn svg path');
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+                playBtnIcon.setAttribute('d', 'M8 5v14l11-7z');
+            } else {
+                player.playVideo();
+                playBtnIcon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+            }
+        }
+
+        function toggleMute() {
+            var muteBtnIcon = document.querySelector('#muteUnmuteBtn svg path');
+            if (player.isMuted()) {
+                player.unMute();
+                player.setVolume(100);
+                muteBtnIcon.setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z');
+            } else {
+                player.mute();
+                muteBtnIcon.setAttribute('d', 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z');
+            }
+        }
+    </script>
+</body>
+</html>
