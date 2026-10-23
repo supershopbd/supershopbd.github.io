@@ -10,6 +10,25 @@
     <!-- Google Fonts for Bengali Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Meta Pixel Code (ID: 1115717784543544) -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        fbq('init', '1115717784543544');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1115717784543544&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+
     <style>
         /* --- Root Variables for Colors --- */
         :root {
@@ -40,7 +59,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            background-color: var(--bg-light); /* Default fallback */
+            background-color: var(--bg-light);
             color: var(--text-dark);
             zoom: 0.9; 
             overflow-x: hidden;
@@ -85,7 +104,7 @@
         }
         .nav-btn:hover { opacity: 0.9; }
 
-        /* --- Hero Section (Sized to Match Marked White Box) --- */
+        /* --- Hero Section --- */
         .hero { 
             position: relative;
             padding: 82px 0 15px;
@@ -94,8 +113,8 @@
         
         .hero-banner-container {
             position: relative;
-            max-width: 1120px; /* Wide hero proportion with slight left-right margin */
-            height: 430px; /* Fixed height matching the marked white box */
+            max-width: 1120px;
+            height: 430px;
             margin: 0 auto;
             border-radius: 14px; 
             overflow: hidden; 
@@ -114,22 +133,9 @@
         .hero-banner-img {
             width: 100%;
             height: 100%;
-            object-fit: fill; /* Fits exact box size without cropping any text */
+            object-fit: fill;
             display: block;
             flex-shrink: 0;
-        }
-        
-        .hero-fallback-div {
-            width: 100%;
-            height: 100%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #1e293b;
-            color: #94a3b8;
-            text-align: center;
-            box-sizing: border-box;
         }
 
         .hero-overlay-content {
@@ -147,7 +153,7 @@
         .download-btn:hover { transform: translateY(-3px); }
         .os-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.65); padding: 5px 13px; border-radius: 20px; font-size: 12px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.2);}
 
-        /* --- Animated Carousel Dots (For Hero & Screenshots) --- */
+        /* --- Animated Carousel Dots --- */
         .slider-dots {
             display: flex;
             justify-content: center;
@@ -171,7 +177,6 @@
             border-color: transparent;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
         }
-        /* Dots styling specifically for Light Theme Screenshot section */
         .dots-light .slider-dot {
             background-color: #cbd5e1;
             border-color: #94a3b8;
@@ -181,57 +186,100 @@
             border-color: transparent;
         }
 
-        /* --- Video Demo Section (Dark Theme) --- */
-        .video-section { padding: 30px 0 60px; color: var(--text-light); }
-        .section-title-dark { font-size: 32px; font-weight: 700; margin-top: 0; margin-bottom: 12px; color: var(--text-light);}
-        .section-subtitle-dark { color: var(--text-muted-dark); font-size: 15px; margin-bottom: 40px; }
+        /* --- Video Demo Section (Optimized 16:9 Ratio & Zero Distraction) --- */
+        .video-section { padding: 25px 0 50px; color: var(--text-light); }
+        .section-title-dark { font-size: 30px; font-weight: 700; margin-top: 0; margin-bottom: 10px; color: var(--text-light);}
+        .section-subtitle-dark { color: var(--text-muted-dark); font-size: 15px; margin-bottom: 28px; }
         
         .youtube-container {
             position: relative;
-            max-width: 850px;
+            width: 100%;
+            max-width: 720px; /* Ideal compact width for Laptop & Desktop */
+            aspect-ratio: 16 / 9; /* Exact 16:9 ratio - eliminates top/bottom black bars */
             margin: 0 auto;
             border-radius: 14px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            padding-bottom: 56.25%; 
-            height: 0;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.55);
             background: #000;
         }
         .youtube-container iframe {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
+            border: 0;
+            pointer-events: none; /* Blocks clicking YouTube logo, Share, or More Videos */
+        }
+
+        /* Click Shield & Clean Pause Overlay (Hides YouTube "More Videos" popup) */
+        .video-click-shield {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 5;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            transition: background 0.25s ease;
+        }
+        .video-click-shield.paused {
+            background: rgba(15, 23, 42, 0.92); /* Completely covers YouTube's More Videos box when paused */
+            backdrop-filter: blur(6px);
+        }
+        .pause-overlay-badge {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .video-click-shield.paused .pause-overlay-badge {
+            display: flex;
+        }
+        .pause-play-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
         }
 
         /* Custom Controls */
         .custom-video-controls {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 14px;
+            right: 14px;
             display: flex;
             gap: 8px;
             z-index: 10;
         }
         .control-btn {
-            background: rgba(0,0,0,0.7);
+            background: rgba(15, 23, 42, 0.78);
             color: white;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.25);
             padding: 8px 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
             backdrop-filter: blur(5px);
             transition: 0.3s;
-            display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
         .control-btn:hover { background: var(--primary); border-color: var(--primary); }
 
-        /* --- Pain Points Section (Dark Theme ending here) --- */
-        .pain-points { padding: 60px 0 120px; color: var(--text-light); }
+        /* --- Pain Points Section --- */
+        .pain-points { padding: 50px 0 110px; color: var(--text-light); }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         
-        /* The Card Fix - ensuring it stays on top of the gradient */
         .pain-card { 
             background-color: var(--bg-card-dark); 
             padding: 30px; 
@@ -240,7 +288,7 @@
             text-align: left; 
             transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
             position: relative;
-            z-index: 2; /* Forces card to be above the gradient background */
+            z-index: 2;
         }
         .pain-card:hover { 
             transform: translateY(-8px); 
@@ -261,7 +309,7 @@
         .section-title-light { font-size: 32px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); }
         .section-subtitle-light { color: var(--text-muted-light); font-size: 15px; margin-bottom: 40px; }
 
-        /* --- AI Features Section (Light Theme) --- */
+        /* --- AI Features Section --- */
         .features { padding: 40px 0 60px; }
         .feature-card { 
             background-color: var(--bg-card-light); 
@@ -290,7 +338,7 @@
         .feature-card p { color: var(--text-muted-light); font-size: 15px; margin: 0; }
         .highlight-text { color: var(--primary); font-weight: 600; }
 
-        /* --- Target Audience (Light Theme) --- */
+        /* --- Target Audience --- */
         .audience { padding: 60px 0; }
         .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
         .aud-card { background: var(--bg-card-light); padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; text-align: left; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
@@ -302,7 +350,7 @@
         .aud-card .content { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f5f9; color: var(--text-muted-light); font-size: 14px; }
         .aud-card.active .content { display: block; }
 
-        /* --- Screenshot Slider (With Click to Enlarge & Dots) --- */
+        /* --- Screenshot Slider --- */
         .screenshot-section { padding: 60px 0; }
         .slider-container { 
             max-width: 850px; 
@@ -324,12 +372,10 @@
             height: auto;
             flex-shrink: 0;
             display: block;
-            cursor: zoom-in; /* Indicates clickable image */
+            cursor: zoom-in;
             transition: opacity 0.2s;
         }
-        .slides img:hover {
-            opacity: 0.96;
-        }
+        .slides img:hover { opacity: 0.96; }
         .zoom-hint {
             font-size: 13px;
             color: var(--text-muted-light);
@@ -340,7 +386,7 @@
             gap: 5px;
         }
 
-        /* --- Image Lightbox Modal (For Screenshot Zoom/Hold) --- */
+        /* --- Image Lightbox Modal --- */
         .lightbox-modal {
             display: none;
             position: fixed;
@@ -404,7 +450,7 @@
         .lightbox-prev { left: -60px; }
         .lightbox-next { right: -60px; }
 
-        /* --- Review Section (Light Theme) --- */
+        /* --- Review Section --- */
         .review-section { padding: 60px 0; overflow: hidden; position: relative; }
         .review-container { display: flex; gap: 18px; animation: scrollLeft 40s linear infinite; white-space: nowrap; padding: 15px 0; margin-bottom: 25px; } 
         .review-container:hover { animation-play-state: paused; }
@@ -429,7 +475,7 @@
         .modal-submit { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.3s;}
         .modal-submit:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
 
-        /* --- Pricing Section (CENTER ALIGNED) --- */
+        /* --- Pricing Section --- */
         .pricing { padding: 60px 0; }
         .price-box { max-width: 450px; margin: 0 auto; background: var(--bg-card-light); padding: 40px 25px; border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; position: relative; text-align: center; }
         .price-box .section-title-light { font-size: 24px; }
@@ -471,9 +517,7 @@
             margin-right: auto;
             line-height: 1.6;
         }
-        .fd-box p strong {
-            color: var(--primary);
-        }
+        .fd-box p strong { color: var(--primary); }
         .final-btn { 
             display: inline-flex; 
             align-items: center; 
@@ -504,22 +548,31 @@
         }
         .final-os-badge svg { width: 16px; height: 16px; fill: #0078d7; }
 
-        /* --- Footer (Dark Theme) --- */
+        /* --- Footer --- */
         footer { padding: 25px 0; border-top: 1px solid rgba(255,255,255,0.05); background-color: var(--bg-dark); color: var(--text-light);}
         .footer-container { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .footer-logo { height: 22px; opacity: 0.8; }
         .footer-links a { color: var(--text-muted-dark); font-size: 13px; transition: 0.3s; }
         .footer-links a:hover { color: white; text-decoration: underline; }
 
+        /* --- Mobile Responsive Optimization --- */
         @media (max-width: 768px) {
-            .hero-banner-container { height: auto; }
+            body { zoom: 1; }
+            .container { padding: 0 14px; }
+            .hero { padding: 75px 0 10px; }
+            .hero-banner-container { height: auto; border-radius: 10px; }
             .hero-banner-img { height: auto; }
-            .hero-overlay-content { position: relative; bottom: 0; right: 0; padding: 20px; }
-            .footer-container { flex-direction: column; gap: 12px; text-align: center; }
-            body { zoom: 1; } /* Reset zoom on mobile */
+            .hero-overlay-content { position: relative; bottom: 0; right: 0; padding: 15px; background: #0f172a; }
+            .video-section { padding: 15px 0 35px; }
+            .section-title-dark, .section-title-light { font-size: 22px; }
+            .section-subtitle-dark, .section-subtitle-light { font-size: 13.5px; margin-bottom: 20px; }
+            .youtube-container { max-width: 100%; border-radius: 10px; }
+            .control-btn { padding: 6px 10px; font-size: 12px; }
             .gradient-bg-wrapper { background: linear-gradient(to bottom, var(--bg-dark) 0%, var(--bg-dark) 45%, var(--bg-light) 45%, var(--bg-light) 100%); }
-            .fd-box h2 { font-size: 24px; }
-            .final-btn { font-size: 16px; padding: 15px 30px; }
+            .fd-box { padding: 30px 18px; }
+            .fd-box h2 { font-size: 22px; }
+            .final-btn { font-size: 16px; padding: 14px 26px; }
+            .footer-container { flex-direction: column; gap: 12px; text-align: center; }
             .lightbox-prev { left: 10px; }
             .lightbox-next { right: 10px; }
         }
@@ -539,7 +592,7 @@
         </div>
     </header>
 
-    <!-- Hero Section (Dark Theme with Smart Slider, White-Box Sizing & Moving Dots) -->
+    <!-- Hero Section -->
     <section class="hero container">
         <div class="hero-banner-container" id="heroContainer">
             <div class="hero-slides" id="heroSlider">
@@ -550,7 +603,7 @@
             </div>
             
             <div class="hero-overlay-content">
-                <a href="https://github.com/supershopbd/supershopbd.github.io/releases/download/v1.0/Super_AI_Typing_Setup_v1.0.1.exe" class="download-btn">
+                <a href="https://github.com/supershopbd/supershopbd.github.io/releases/download/v1.0/Super_AI_Typing_Setup_v1.0.1.exe" class="download-btn track-download-btn" data-location="Hero_Banner">
                     <svg class="svg-icon" viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                     সম্পূর্ণ বিনামূল্যে ডাউনলোড করুন
                 </a>
@@ -578,8 +631,20 @@
                     </button>
                     <button class="control-btn" id="muteUnmuteBtn" onclick="toggleMute()" title="Mute/Unmute">
                         <svg class="svg-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                        <span id="muteLabel">সাউন্ড অন করুন</span>
                     </button>
                 </div>
+
+                <!-- Shield to block YouTube distractions & cover "More videos" on pause -->
+                <div class="video-click-shield" id="videoShield" onclick="togglePlayPause()">
+                    <div class="pause-overlay-badge">
+                        <div class="pause-play-circle">
+                            <svg class="svg-icon" viewBox="0 0 24 24" style="width:28px;height:28px;fill:white;margin-left:3px;"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span>পুনরায় ভিডিওটি দেখতে ক্লিক করুন</span>
+                    </div>
+                </div>
+
                 <div id="ytplayer"></div>
             </div>
         </div>
@@ -715,7 +780,7 @@
         </div>
     </section>
 
-    <!-- Screenshot Slider (With Moving Dots & Click to Zoom/Hold) -->
+    <!-- Screenshot Slider -->
     <section class="screenshot-section text-center">
         <div class="container">
             <h2 class="section-title-light">এক নজরে সফটওয়্যার ইন্টারফেস</h2>
@@ -819,7 +884,7 @@
         </div>
     </div>
 
-    <!-- Pricing Section (CENTER ALIGNED AS REQUESTED) -->
+    <!-- Pricing Section -->
     <section class="pricing text-center">
         <div class="container">
             <h2 class="section-title-light">পেমেন্ট করতে হবে ডলার বা কার্ডে? একদম না!</h2>
@@ -853,7 +918,7 @@
                     সম্পূর্ণ বিনামূল্যে ডাউনলোড করুন। আপনি এই তিনটি ফ্রি ট্রায়াল ব্যবহার করে যাচাই করুন, তারপরে যেকোনো একটি সাবস্ক্রিপশন কিনে আনলিমিটেড ভয়েস টাইপিং ও ট্রান্সলেশন ব্যবহার করুন।
                 </p>
                 
-                <a href="https://github.com/supershopbd/supershopbd.github.io/releases/download/v1.0/Super_AI_Typing_Setup_v1.0.1.exe" class="final-btn">
+                <a href="https://github.com/supershopbd/supershopbd.github.io/releases/download/v1.0/Super_AI_Typing_Setup_v1.0.1.exe" class="final-btn track-download-btn" data-location="Bottom_CTA">
                     <svg class="svg-icon" viewBox="0 0 24 24" style="width:24px;height:24px;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                     সম্পূর্ণ বিনামূল্যে ডাউনলোড করুন
                 </a>
@@ -906,7 +971,6 @@
                 let intervalId = null;
                 let isPaused = false;
 
-                // Create dots dynamically if more than 1 image exists
                 dotsContainer.innerHTML = '';
                 const dots = [];
                 if (total > 1) {
@@ -923,7 +987,6 @@
                     }
                 }
 
-                // Enable click-to-zoom lightbox for screenshots
                 if (enableLightbox) {
                     validSlides.forEach((img, idx) => {
                         img.onclick = () => openLightbox(validSlides, idx, sliderId);
@@ -954,7 +1017,6 @@
                     startTimer();
                 }
 
-                // Pause on mouse hover so user can focus
                 if (wrapper) {
                     wrapper.addEventListener('mouseenter', () => { isPaused = true; });
                     wrapper.addEventListener('mouseleave', () => { isPaused = false; });
@@ -972,7 +1034,7 @@
         initSmartSlider('heroSlider', 'heroDots', 'heroContainer', false);
         initSmartSlider('screenshotSlider', 'screenshotDots', 'screenshotContainer', true);
 
-        // 3. Fullscreen Lightbox Functions for Screenshot Zoom/Hold
+        // 3. Fullscreen Lightbox Functions
         let currentLightboxImages = [];
         let currentLightboxIndex = 0;
         let activeSliderIdForLightbox = null;
@@ -1011,7 +1073,6 @@
             }
         }
 
-        // Keyboard Esc & Arrow support for Lightbox
         document.addEventListener('keydown', (e) => {
             const modal = document.getElementById('lightboxModal');
             if (modal.style.display === 'flex') {
@@ -1032,16 +1093,13 @@
             document.getElementById('rText').value = '';
         }
 
-        // 5. YouTube Iframe API
+        // 5. YouTube Iframe API (Distraction-Free & No Subtitles)
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-        // ==========================================
-        // আপনার ইউটিউব ভিডিও আইডি যুক্ত করা হয়েছে
-        // ==========================================
         var videoPlaylist = ['NdrX0Rxj8vQ']; 
 
         function onYouTubeIframeAPIReady() {
@@ -1051,45 +1109,118 @@
                 videoId: videoPlaylist[0],
                 playerVars: {
                     'autoplay': 1,
-                    'controls': 0, 
-                    'rel': 0, 
+                    'controls': 0,
+                    'rel': 0,
                     'showinfo': 0,
                     'modestbranding': 1,
-                    'mute': 1, 
+                    'iv_load_policy': 3, // Hides video annotations
+                    'cc_load_policy': 0, // Forces English auto-captions OFF
+                    'disablekb': 1,
+                    'fs': 0,
+                    'mute': 1,
                     'loop': 1,
                     'playlist': videoPlaylist.join(','),
                     'playsinline': 1
                 },
                 events: {
-                    'onReady': onPlayerReady
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
                 }
             });
         }
 
-        function onPlayerReady(event) { event.target.playVideo(); }
+        function onPlayerReady(event) {
+            event.target.playVideo();
+            // Explicitly unload captions module if YouTube tries to force it
+            try { player.unloadModule("captions"); player.unloadModule("cc"); } catch (e) {}
+        }
+
+        function onPlayerStateChange(event) {
+            var playBtnIcon = document.querySelector('#playPauseBtn svg path');
+            var shield = document.getElementById('videoShield');
+
+            // Keep captions off when playing
+            if (event.data == YT.PlayerState.PLAYING) {
+                try { player.unloadModule("captions"); player.unloadModule("cc"); } catch (e) {}
+                playBtnIcon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+                shield.classList.remove('paused');
+            } else if (event.data == YT.PlayerState.PAUSED) {
+                playBtnIcon.setAttribute('d', 'M8 5v14l11-7z');
+                shield.classList.add('paused'); // Covers YouTube's "More videos" popup
+            } else if (event.data == YT.PlayerState.ENDED) {
+                player.playVideo(); // Seamless loop
+            }
+        }
 
         function togglePlayPause() {
-            var playBtnIcon = document.querySelector('#playPauseBtn svg path');
+            if (!player || typeof player.getPlayerState !== 'function') return;
             if (player.getPlayerState() == YT.PlayerState.PLAYING) {
                 player.pauseVideo();
-                playBtnIcon.setAttribute('d', 'M8 5v14l11-7z');
             } else {
                 player.playVideo();
-                playBtnIcon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
             }
         }
 
         function toggleMute() {
+            if (!player || typeof player.isMuted !== 'function') return;
             var muteBtnIcon = document.querySelector('#muteUnmuteBtn svg path');
+            var muteLabel = document.getElementById('muteLabel');
             if (player.isMuted()) {
                 player.unMute();
                 player.setVolume(100);
                 muteBtnIcon.setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z');
+                if (muteLabel) muteLabel.textContent = 'সাউন্ড অন আছে';
             } else {
                 player.mute();
                 muteBtnIcon.setAttribute('d', 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z');
+                if (muteLabel) muteLabel.textContent = 'সাউন্ড অন করুন';
             }
         }
+
+        // 6. Meta Pixel Advanced Tracking (Scroll Depth + Download/Purchase Events)
+        (function() {
+            // A. Track 50% Scroll Depth (Fires once per visit)
+            var scrollTracked = false;
+            window.addEventListener('scroll', function() {
+                if (scrollTracked) return;
+                var scrollTop = window.scrollY || document.documentElement.scrollTop;
+                var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (docHeight > 0 && (scrollTop / docHeight) >= 0.5) {
+                    scrollTracked = true;
+                    if (typeof fbq === 'function') {
+                        fbq('trackCustom', 'Scroll_50_Percent', {
+                            content_name: 'Super AI Typing Landing Page'
+                        });
+                        fbq('track', 'ViewContent', {
+                            content_name: 'Super AI Typing Features Viewed'
+                        });
+                    }
+                }
+            });
+
+            // B. Track Download Button Clicks as both Purchase & Lead (For Order Now & Download Campaigns)
+            var downloadButtons = document.querySelectorAll('.track-download-btn');
+            downloadButtons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var btnLocation = this.getAttribute('data-location') || 'Landing_Page';
+                    if (typeof fbq === 'function') {
+                        // 1. Standard Purchase Event (Optimizes "Order Now / Sales" Campaigns)
+                        fbq('track', 'Purchase', {
+                            value: 20.00,
+                            currency: 'BDT',
+                            content_name: 'Super AI Typing Setup v1.0.1',
+                            content_type: 'product',
+                            button_location: btnLocation
+                        });
+                        // 2. Standard Lead Event (Optimizes "Download / Lead" Campaigns)
+                        fbq('track', 'Lead', {
+                            content_name: 'Super AI Typing Free Trial Download',
+                            button_location: btnLocation
+                        });
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 </html>
